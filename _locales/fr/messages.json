@@ -1,0 +1,43 @@
+{
+	"linkPatternsDescription": {
+		"message": "Entrer les schémas de liens (un par ligne)"
+	},
+	"linkPatternsPlaceholder": {
+		"message": "Pas de schémas enregistrés"
+	},
+	"pleaseEnterAtLeastOneLinkPattern": {
+		"message": "Merci d'entrer au moins un schéma de lien"
+	},
+	"copyLinksButton": {
+		"message": "Copier les liens"
+	},
+	"noDownloadLinksDetected": {
+		"message": "Aucun lien de téléchargement détecté. Veuillez ouvrir des onglets contenant des liens de téléchargement avant d'utiliser l'extension."
+	},
+	"downloadLinksCopied": {
+		"message": "$count$ lien(s) de téléchargement copié(s) dans le presse-papiers",
+		"placeholders": {
+			"count": {
+				"content": "$1"
+			}
+		}
+	},
+	"unrestrictLinks": {
+		"message": "Débrider les liens"
+	},
+	"enterRealDebridDescription": {
+		"message": "Entrer le token API de real-debrid"
+	},
+	"pleaseEnterRealDebridTokenAPI": {
+		"message": "Merci d'entrer le token API de real-debrid"
+	},
+	"openNewTab": {
+		"message": "Ouvrir un nouvel onglet"
+	},
+	"enterNewTabUrlToOpen": {
+		"message": "Entrer l'URL du nouvel onglet à ouvrir"
+	},
+	"closeTabs": {
+		"message": "Fermer les onglets"
+	}
+}

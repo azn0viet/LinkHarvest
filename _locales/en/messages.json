@@ -1,0 +1,43 @@
+{
+	"linkPatternsDescription": {
+		"message": "Enter link patterns (one per line)"
+	},
+	"linkPatternsPlaceholder": {
+		"message": "No patterns saved"
+	},
+	"pleaseEnterAtLeastOneLinkPattern": {
+		"message": "Please enter at least one link pattern"
+	},
+	"copyLinksButton": {
+		"message": "Copy links"
+	},
+	"noDownloadLinksDetected": {
+		"message": "No download links detected. Please open tabs with download links before using the extension."
+	},
+	"downloadLinksCopied": {
+		"message": "$count$ download link(s) copied in clipboard",
+		"placeholders": {
+			"count": {
+				"content": "$1"
+			}
+		}
+	},
+	"unrestrictLinks": {
+		"message": "Unrestrict links"
+	},
+	"enterRealDebridDescription": {
+		"message": "Enter real-debrid token API"
+	},
+	"pleaseEnterRealDebridTokenAPI": {
+		"message": "Please enter real-debrid token API"
+	},
+	"openNewTab": {
+		"message": "Open new tab"
+	},
+	"enterNewTabUrlToOpen": {
+		"message": "Enter new tab URL to open"
+	},
+	"closeTabs": {
+		"message": "Close tabs"
+	}
+}

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LinkHarvest Settings</title>
+  <link rel="stylesheet" type="text/css" href="popup.css">
+</head>
+<body>
+  <label id="linkPatternsLabel" for="linkPatterns">Enter link patterns (one per line):</label>
+  <textarea id="linkPatterns" placeholder="No patterns saved"></textarea>
+  
+  <button id="copyLinksButton" class="full-width">Copy links</button>
+  
+  <div class="checkbox-container">
+    <input type="checkbox" id="unrestrictCheckbox">
+    <label for="unrestrictCheckbox">Unrestrict links</label>
+    <div id="setupUnrestrictIcon" class="icon">&#9881;</div>
+  </div>
+  
+  <div class="checkbox-container">
+    <input type="checkbox" id="openNewTabCheckbox">
+    <label for="openNewTabCheckbox">Open new tab</label>
+    <div id="setupNewTabUrlIcon" class="icon">&#9881;</div>
+  </div>
+  
+  <div class="checkbox-container">
+    <input type="checkbox" id="closeTabsCheckbox">
+    <label for="closeTabsCheckbox">Close tabs</label>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
