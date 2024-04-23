@@ -1,17 +1,16 @@
 {
-  "manifest_version": 3,
+  "manifest_version": 2,
   "name": "LinkHarvest",
   "version": "1.1",
   "default_locale": "en",
-  "permissions": ["tabs", "storage", "downloads"],
-  "host_permissions": ["https://api.real-debrid.com/*"],
-  "action": {
+  "permissions": ["tabs", "storage", "downloads", "https://api.real-debrid.com/*"],
+  "browser_action": {
     "default_icon": "icons/icon128.png",
     "default_title": "LinkHarvest",
     "default_popup": "popup.html"
   },
   "background": {
-    "service_worker": "background.js"
+    "scripts": ["background.js"]
   },
   "icons": {
     "16": "icons/icon16.png",
