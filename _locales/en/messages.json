@@ -8,8 +8,17 @@
 	"pleaseEnterAtLeastOneLinkPattern": {
 		"message": "Please enter at least one link pattern"
 	},
-	"copyLinksButton": {
+	"goButton": {
+		"message": "Go"
+	},
+	"copyLinks": {
 		"message": "Copy links"
+	},
+	"downloadAutomatically": {
+		"message": "Download automatically"
+	},
+	"cannotDownloadWithoutUnrestrictError": {
+		"message": "You cannot download automatically without unrestricting the links."
 	},
 	"noDownloadLinksDetected": {
 		"message": "No download links detected. Please open tabs with download links before using the extension."

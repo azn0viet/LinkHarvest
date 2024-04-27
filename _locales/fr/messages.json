@@ -8,8 +8,17 @@
 	"pleaseEnterAtLeastOneLinkPattern": {
 		"message": "Merci d'entrer au moins un schéma de lien"
 	},
-	"copyLinksButton": {
+	"goButton": {
+		"message": "Go"
+	},
+	"copyLinks": {
 		"message": "Copier les liens"
+	},
+	"downloadAutomatically": {
+		"message": "Télécharger automatiquement"
+	},
+	"cannotDownloadWithoutUnrestrictError": {
+		"message": "Vous ne pouvez pas télécharger automatiquement sans débloquer les liens."
 	},
 	"noDownloadLinksDetected": {
 		"message": "Aucun lien de téléchargement détecté. Veuillez ouvrir des onglets contenant des liens de téléchargement avant d'utiliser l'extension."

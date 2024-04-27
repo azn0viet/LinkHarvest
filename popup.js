@@ -2,6 +2,7 @@
 const kLinkPatternsSettingKey = "linkPatternsSettingKey";
 const kUnrestrictLinksSettingKey = "unrestrictLinksSettingKey";
 const kUnrestrictLinksTokenSettingKey = "unrestrictLinksTokenSettingKey";
+const kActionSettingKey = "actionSettingKey";
 const kOpenNewTabSettingKey = "openNewTabSettingKey";
 const kNewTabUrlSettingKey = "newTabUrlSettingKey";
 const kCloseTabsSettingKey = "closeTabsSettingKey";
@@ -9,7 +10,8 @@ const kCloseTabsSettingKey = "closeTabsSettingKey";
 // HTML components id
 const kLinkPatternsLabelId = "linkPatternsLabel";
 const kLinkPatternsTextAreaId = "linkPatterns";
-const kCopyLinksButtonId = "copyLinksButton";
+const kGoButtonId = "goButton";
+const kActionSelectId = "actionSelect";
 const kUnrestrictCheckboxId = "unrestrictCheckbox";
 const kSetupUnrestrictIconId = "setupUnrestrictIcon";
 const kOpenNewTabCheckboxId = "openNewTabCheckbox";
@@ -27,14 +29,23 @@ document.addEventListener('DOMContentLoaded', function () {
 		setSetting(kLinkPatternsSettingKey, linkPatternsTextArea.value);
 	});
 	
-	document.getElementById(kCopyLinksButtonId).addEventListener('click', function() {
+	document.getElementById(kGoButtonId).addEventListener('click', function() {
 		chrome.tabs.query({}, function (tabs) {
-			console.log("copyLinksButton clicked");
+			console.log("goButton clicked");
 			
+			const unrestrict = document.getElementById(kUnrestrictCheckboxId).checked;
+			const action = document.getElementById(kActionSelectId).value;
+
+			if (action === 'download' && !unrestrict) {
+				alert(chrome.i18n.getMessage('cannotDownloadWithoutUnrestrictError'));
+				return;
+			}
+
 			chrome.runtime.sendMessage({ 
 				action: "processTabs", 
 				tabs: tabs,
-				unrestrict: document.getElementById(kUnrestrictCheckboxId).checked
+				unrestrict: unrestrict,
+				action: action
 			});
 		});
 	});
@@ -62,6 +73,11 @@ document.addEventListener('DOMContentLoaded', function () {
 		setSetting(kCloseTabsSettingKey, closeTabsCheckbox.checked);
 	});
 
+	const actionSelect = document.getElementById(kActionSelectId);
+	actionSelect.addEventListener('change', function() {
+		setSetting(kActionSettingKey, actionSelect.value);
+	});
+
 	chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 		chrome.tabs.getCurrent((currentTab) => {
 			if (request.action === 'showErrorAlert') {
@@ -69,12 +85,21 @@ document.addEventListener('DOMContentLoaded', function () {
 			}
 			else if (request.action === 'handleUrlsResult') {
 				const urls = request.urls;
-				const joinedUrls = urls.join('\n');
 				
-				copyToClipboard(joinedUrls);
-				
-				var message = chrome.i18n.getMessage('downloadLinksCopied', [urls.length]);
-				alert(message + "\n\n" + joinedUrls);
+				const action = document.getElementById(kActionSelectId).value || 'copy';
+				if (action === 'download') {
+					console.log("Download all urls");
+					urls.forEach(function(url) {
+						chrome.downloads.download({	url: url })
+					});
+				} else {
+					console.log("Copy all urls");
+					const joinedUrls = urls.join('\n');
+					copyToClipboard(joinedUrls);
+
+					var message = chrome.i18n.getMessage('downloadLinksCopied', [urls.length]);
+					alert(message + "\n\n" + joinedUrls);
+				}
 				
 				const openNewTabCheckbox = document.getElementById(kOpenNewTabCheckboxId);
 				if (openNewTabCheckbox.checked) {
@@ -97,6 +122,7 @@ document.addEventListener('DOMContentLoaded', function () {
 function loadLocalStorageConfig() {
 	const keys = [
 		kLinkPatternsSettingKey,
+		kActionSettingKey,
 		kUnrestrictLinksSettingKey,
 		kOpenNewTabSettingKey,
 		kCloseTabsSettingKey
@@ -105,6 +131,9 @@ function loadLocalStorageConfig() {
 	chrome.storage.local.get(keys, function (result) {
 		const linkPatterns = result[kLinkPatternsSettingKey] || '';
 		document.getElementById(kLinkPatternsTextAreaId).value = linkPatterns;
+
+		const actionSetting = result[kActionSettingKey] || "copy";
+		document.getElementById(kActionSelectId).value = actionSetting;
 		
 		loadCheckbox(kUnrestrictCheckboxId, result[kUnrestrictLinksSettingKey]);
 		loadCheckbox(kOpenNewTabCheckboxId, result[kOpenNewTabSettingKey]);
@@ -120,11 +149,14 @@ function loadCheckbox(id, storedValue) {
 function localizeUI() {
 	document.getElementById(kLinkPatternsLabelId).innerText = chrome.i18n.getMessage('linkPatternsDescription');
 	document.getElementById(kLinkPatternsTextAreaId).placeholder = chrome.i18n.getMessage('linkPatternsPlaceholder');
-	document.getElementById(kCopyLinksButtonId).innerText = chrome.i18n.getMessage('copyLinksButton');
+	document.getElementById(kGoButtonId).innerText = chrome.i18n.getMessage('goButton');
 	
 	document.querySelector("label[for=" + kUnrestrictCheckboxId + "]").innerText = chrome.i18n.getMessage('unrestrictLinks');
 	document.querySelector("label[for=" + kOpenNewTabCheckboxId + "]").innerText = chrome.i18n.getMessage('openNewTab');
 	document.querySelector("label[for=" + kCloseTabsCheckboxId + "]").innerText = chrome.i18n.getMessage('closeTabs');
+
+	document.querySelector("option[value=copy]").innerHTML = chrome.i18n.getMessage('copyLinks');
+	document.querySelector("option[value=download]").innerHTML = chrome.i18n.getMessage('downloadAutomatically');
 }
 
 function promptSetting(key, title) {

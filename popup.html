@@ -11,8 +11,15 @@
   <label id="linkPatternsLabel" for="linkPatterns">Enter link patterns (one per line):</label>
   <textarea id="linkPatterns" placeholder="No patterns saved"></textarea>
   
-  <button id="copyLinksButton" class="full-width">Copy links</button>
-  
+  <button id="goButton" class="full-width">Go</button>
+
+  <select id="actionSelect">
+    <option value="copy">Copy links</option>
+    <option value="download">Download automatically</option>
+  </select>
+
+  </br></br>
+
   <div class="checkbox-container">
     <input type="checkbox" id="unrestrictCheckbox">
     <label for="unrestrictCheckbox">Unrestrict links</label>

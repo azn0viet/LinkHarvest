@@ -3,7 +3,7 @@
   "name": "LinkHarvest",
   "version": "1.0",
   "default_locale": "en",
-  "permissions": ["tabs", "storage"],
+  "permissions": ["tabs", "storage", "downloads"],
   "host_permissions": ["https://api.real-debrid.com/*"],
   "action": {
     "default_icon": "icons/icon128.png",

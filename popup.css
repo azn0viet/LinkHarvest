@@ -38,6 +38,11 @@ button:hover {
   background-color: #45a049;
 }
 
+select {
+  width: 100%;
+  text-align: center;
+}
+
 .checkbox-container {
   display: flex;
   align-items: center;
