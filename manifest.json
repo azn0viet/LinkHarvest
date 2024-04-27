@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "LinkHarvest",
-  "version": "1.0",
+  "version": "1.1",
   "default_locale": "en",
   "permissions": ["tabs", "storage", "downloads"],
   "host_permissions": ["https://api.real-debrid.com/*"],
