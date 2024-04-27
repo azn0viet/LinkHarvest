@@ -155,8 +155,8 @@ function localizeUI() {
 	document.querySelector("label[for=" + kOpenNewTabCheckboxId + "]").innerText = chrome.i18n.getMessage('openNewTab');
 	document.querySelector("label[for=" + kCloseTabsCheckboxId + "]").innerText = chrome.i18n.getMessage('closeTabs');
 
-	document.querySelector("option[value=copy]").innerHTML = chrome.i18n.getMessage('copyLinks');
-	document.querySelector("option[value=download]").innerHTML = chrome.i18n.getMessage('downloadAutomatically');
+	document.querySelector("option[value=copy]").innerText = chrome.i18n.getMessage('copyLinks');
+	document.querySelector("option[value=download]").innerText = chrome.i18n.getMessage('downloadAutomatically');
 }
 
 function promptSetting(key, title) {
